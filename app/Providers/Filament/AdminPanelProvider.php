@@ -18,6 +18,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
+use Caresome\FilamentAuthDesigner\Data\AuthPageConfig;
+use Caresome\FilamentAuthDesigner\Enums\MediaPosition;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -52,6 +55,15 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->plugin(
+                AuthDesignerPlugin::make()
+                    ->login(
+                        fn($config) => $config
+                            ->media(asset('assets/login1.jpg'))
+                            ->mediaPosition(MediaPosition::Right)
+                            ->mediaSize('50%') // Media takes 50% width
+                    )
+            )
             ->authMiddleware([
                 Authenticate::class,
             ]);
