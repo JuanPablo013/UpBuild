@@ -7,8 +7,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "bezhansalleh/filament-shield": "^4.1",
         "caresome/filament-auth-designer": "^2.0",
-        "filament/filament": "4.0",
+        "filament/filament": "^4.0",
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
