@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use App\Services\AiService;
 use BackedEnum;
 use Livewire\Attributes\Public;
+use UnitEnum;
 
 class ProbarIA extends Page
     implements HasForms
@@ -17,6 +18,8 @@ class ProbarIA extends Page
     use InteractsWithForms;
 
     protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-user-group';
+    protected static string | UnitEnum | null $navigationGroup = 'Inteligencia Artificial';
+
     protected string $view = 'filament.pages.probar_ia';
     protected static ?string $navigationLabel = 'IA Testing';
     protected static ?string $slug = 'probar-ia';
