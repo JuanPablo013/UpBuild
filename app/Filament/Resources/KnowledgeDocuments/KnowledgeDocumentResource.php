@@ -13,16 +13,24 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class KnowledgeDocumentResource extends Resource
 {
     protected static ?string $model = KnowledgeDocument::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-document-arrow-up';
+
 
     protected static ?string $recordTitleAttribute = 'Procesar Docuemntos';
 
-    protected static ?string $clusterBreadcrumb = 'cluster';
+    protected static ?string $pluralModelLabel = 'Documentos de Conocimiento';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static string | UnitEnum | null $navigationGroup = 'Inteligencia Artificial';
+
+
 
 
     public static function form(Schema $schema): Schema

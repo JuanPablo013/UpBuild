@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class KnowledgeChunkResource extends Resource
 {
@@ -21,6 +22,8 @@ class KnowledgeChunkResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Conocimiento IA';
+
+     protected static string | UnitEnum | null $navigationGroup = 'Inteligencia Artificial';
 
     public static function form(Schema $schema): Schema
     {

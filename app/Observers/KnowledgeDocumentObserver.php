@@ -1,49 +1,30 @@
 <?php
-
 namespace App\Observers;
 
 use App\Jobs\ProcessKnowledgeDocument;
 use App\Models\KnowledgeDocument;
+use Illuminate\Support\Facades\Log;
 
 class KnowledgeDocumentObserver
 {
-    /**
-     * Handle the KnowledgeDocument "created" event.
-     */
-    public function created(KnowledgeDocument $knowledgeDocument): void
+    public function created(KnowledgeDocument $document): void
     {
-         //ProcessKnowledgeDocumentument::dispatch($document);
+        Log::info('🔥 Observer created triggered', [
+            'id' => $document->id,
+            'file_path' => $document->file_path,
+            'file_type' => $document->file_type,
+        ]);
+
+        // Ejecutar sincrónicamente para debug
+        ProcessKnowledgeDocument::dispatchSync($document);
     }
 
-    /**
-     * Handle the KnowledgeDocument "updated" event.
-     */
-    public function updated(KnowledgeDocument $knowledgeDocument): void
+    public function updated(KnowledgeDocument $document): void
     {
-        //
-    }
-
-    /**
-     * Handle the KnowledgeDocument "deleted" event.
-     */
-    public function deleted(KnowledgeDocument $knowledgeDocument): void
-    {
-        //
-    }
-
-    /**
-     * Handle the KnowledgeDocument "restored" event.
-     */
-    public function restored(KnowledgeDocument $knowledgeDocument): void
-    {
-        //
-    }
-
-    /**
-     * Handle the KnowledgeDocument "force deleted" event.
-     */
-    public function forceDeleted(KnowledgeDocument $knowledgeDocument): void
-    {
-        //
+        // Si el archivo cambió, reprocesar
+        if ($document->isDirty('file_path')) {
+            Log::info('🔥 Observer updated triggered - file changed');
+            ProcessKnowledgeDocument::dispatchSync($document);
+        }
     }
 }

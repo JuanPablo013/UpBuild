@@ -27,4 +27,6 @@ class KnowledgeDocument extends Model
     protected $casts = [
         'raw_text' => 'string',
     ];
+
+      protected $dispatchesEvents = [];
 }
