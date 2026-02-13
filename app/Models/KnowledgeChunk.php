@@ -15,7 +15,13 @@ class KnowledgeChunk extends Model
         'knowledge_document_id',
         'chunk_index',
         'content',
+        'embedding',
     ];
+
+    protected $casts = [
+        'embedding' => 'array',
+    ];
+
 
     /**
      * Relación: un chunk pertenece a un documento de conocimiento
