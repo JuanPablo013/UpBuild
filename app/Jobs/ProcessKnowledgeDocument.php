@@ -2,6 +2,7 @@
 namespace App\Jobs;
 
 use App\Models\KnowledgeDocument;
+use App\Services\ChunksDocuments\KnowledgeChunkService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -61,6 +62,9 @@ class ProcessKnowledgeDocument implements ShouldQueue
             Log::info('💾 Document updated successfully', [
                 'saved_length' => strlen($this->document->fresh()->raw_text ?? ''),
             ]);
+
+            ProcessKnowledgeDocumentChunks::dispatch($this->document);
+
 
         } catch (\Exception $e) {
             Log::error('❌ Job failed', [
