@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class KnowledgeChunkService
 {
-    public function processDocument(KnowledgeDocument $document, int $chunkSize = 1000, int $overlap = 200): void
+    public function processDocument(KnowledgeDocument $document, int $chunkSize = 500, int $overlap = 100): void
     {
         $text = trim($document->raw_text);
 
