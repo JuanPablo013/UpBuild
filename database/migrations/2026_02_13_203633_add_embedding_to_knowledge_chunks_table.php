@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        Schema::ensureVectorExtensionExists();
+
         Schema::table('knowledge_chunks', function (Blueprint $table) {
-            $table->json('embedding')->nullable()->after('content');
+            $table->vector('embedding', dimensions: 2560)->after('content')->nullable();
         });
     }
 
