@@ -18,10 +18,12 @@ class KnowledgeChunk extends Model
         'embedding',
     ];
 
-    protected $casts = [
+   protected function casts(): array
+{
+    return [
         'embedding' => 'array',
     ];
-
+}
 
     /**
      * Relación: un chunk pertenece a un documento de conocimiento
