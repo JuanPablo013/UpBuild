@@ -2,6 +2,7 @@
 
 namespace App\Ai\Agents;
 
+use App\Ai\Tools\SimilaritySearch;
 use Laravel\Ai\Concerns\RemembersConversations;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
@@ -41,7 +42,9 @@ class ChatBot implements Agent, Conversational, HasTools
      */
     public function messages(): iterable
     {
-        return [];
+        return [
+
+        ];
     }
 
     /**
@@ -51,6 +54,8 @@ class ChatBot implements Agent, Conversational, HasTools
      */
     public function tools(): iterable
     {
-        return [];
+        return [
+             new SimilaritySearch(),
+        ];
     }
 }
