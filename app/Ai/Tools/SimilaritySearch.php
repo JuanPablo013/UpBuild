@@ -22,40 +22,40 @@ class SimilaritySearch implements Tool
     /**
      * Execute the tool.
      */
-    public function handle(Request $request): Stringable|string
-    {
-        $query = $request->input('value');
+  public function handle(mixed ...$arguments): Stringable|string
+{
+    $value = $arguments[0] ?? null;
 
-        if(empty($query)) {
-            return 'Error: El valor de entrada no puede estar vacío.';
-        }
-
-        $embedding = Embeddings::create($query)->embedding;
-
-         $chunks = KnowledgeChunk::query()
-            ->select('content')
-            ->orderByRaw('embedding <-> ?', [$embedding])
-            ->limit(5)
-            ->get();
-
-         if ($chunks->isEmpty()) {
-            return 'No se encontró información relevante en la base de conocimiento.';
-        }
-
-         return $chunks
-            ->pluck('content')
-            ->implode("\n\n---\n\n");
+    if (empty($value) || !is_string($value)) {
+        return 'Error: El valor de entrada no puede estar vacío.';
     }
+
+    $embedding = Embeddings::create($value)->embedding;
+
+    $chunks = KnowledgeChunk::query()
+        ->select('content')
+        ->orderByRaw('embedding <-> ?', [$embedding])
+        ->limit(5)
+        ->get();
+
+    if ($chunks->isEmpty()) {
+        return 'No se encontró información relevante en la base de conocimiento.';
+    }
+
+    return $chunks
+        ->pluck('content')
+        ->implode("\n\n---\n\n");
+}
 
     
 
     /**
      * Get the tool's schema definition.
      */
-    public function schema(JsonSchema $schema): array
-    {
-        return [
-            'value' => $schema->string()->required(),
-        ];
-    }
+   public function schema(JsonSchema $schema): array
+{
+    return [
+        'value' => $schema->string()->required(),
+    ];
+}
 }

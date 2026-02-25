@@ -40,8 +40,8 @@ class EmbeddingService
                 // 2️⃣ Llamada a Ollama local con retry y backoff
                 $response = retry(3, function () use ($contents) {
                     return Embeddings::for($contents)->generate(
-                        Lab::Ollama, // Driver Ollama local
-                        'phi'       // Modelo local de embeddings
+                        Lab::OpenAI, // Driver Ollama local
+                        'text-embedding-3-small'       // Modelo local de embeddings
                     );
                 }, 2000);
 
