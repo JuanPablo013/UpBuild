@@ -21,7 +21,7 @@ class KnowledgeDocumentForm
                 ->disk('public')
                 ->directory('knowledge')
                 ->acceptedFileTypes(['application/pdf', 'text/plain'])
-                ->maxSize(10240)
+                ->maxSize(30240)
                 ->required()
                 ->columnSpanFull(),
 
