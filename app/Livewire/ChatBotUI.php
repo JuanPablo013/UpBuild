@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire;
 
 use Livewire\Component;
@@ -13,6 +12,16 @@ class ChatBotUI extends Component
     public array $messages = [];
     public ?string $conversationId = null;
     public bool $loading = false;
+
+    public function mount(): void
+    {
+        $this->messages = [
+            [
+                'role' => 'bot',
+                'text' => '¡Hola! Soy Alex, tu asesor inmobiliario. ¿Qué tipo de propiedad estás buscando?',
+            ]
+        ];
+    }
 
     public function send()
     {
@@ -59,11 +68,12 @@ class ChatBotUI extends Component
         }
 
         $this->loading = false;
+        $this->dispatch('scroll-to-bottom');
     }
 
-   public function render()
-{
-    return view('livewire.chat-bot-u-i')
-        ->layout('layouts.app');
-}
+    public function render()
+    {
+        return view('livewire.chat-bot-u-i')
+            ->layout('layouts.app');
+    }
 }
