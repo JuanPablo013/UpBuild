@@ -47,10 +47,10 @@ class Campaign extends Model
             ->withTimestamps();
     }
 
-    // public function automaticMessages(): HasMany
-    // {
-    //     return $this->hasMany(AutomaticMessage::class, 'campaign_id');
-    // }
+    public function automaticMessages(): HasMany
+    {
+        return $this->hasMany(AutomaticMessage::class, 'campaign_id');
+    }
 
     // Métodos útiles
     public function canBeActivated(): bool
